@@ -26,6 +26,42 @@
    - **스키마**는 테이블의 **구조와 제약 조건**을 정의하는 설계도로, **SQL 기반 DB**는 고정된 스키마에 따라 데이터를 저장합니다. 즉, 테이블의 열과 데이터 타입이 미리 정의되어 있으며, 데이터 구조가 변경되면 스키마를 수정해야 합니다.
    - **MongoDB와 같은 NoSQL DB**는 **스키마리스**이므로, 도큐먼트가 자유롭게 서로 다른 구조를 가질 수 있으며, 데이터를 추가하거나 수정할 때 스키마 변경 없이 가능해 유연성을 제공합니다.
 
+#### 1. **SQL 기반 데이터베이스에서의 스키마 예시**
+
+```sql
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,    -- 고유 ID (자동 증가)
+    username VARCHAR(255) NOT NULL,            -- 사용자 이름 (NULL 불가)
+    email VARCHAR(255) UNIQUE,                 -- 이메일 주소 (중복 불가)
+    password VARCHAR(255) NOT NULL,            -- 비밀번호 (NULL 불가)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 생성 날짜 (현재 시간 자동 입력)
+    is_active BOOLEAN DEFAULT TRUE             -- 활성화 상태 (기본값 TRUE)
+);
+```
+
+
+#### 2. **MongoDB에서의 스키마리스 구조 (NoSQL)**
+
+```json
+{
+    "_id": 1,
+    "username": "john_doe",
+    "email": "john@example.com",
+    "password": "hashed_password",
+    "created_at": "2023-10-07T10:00:00Z",
+    "is_active": true
+}
+
+{
+    "_id": 2,
+    "username": "jane_doe",
+    "email": "jane@example.com",
+    "address": "123 Main St",
+    "phone": "555-1234",
+    "is_active": false
+}
+```
+
 ### 5. **차원의 저주와 스키마리스의 유연성**
    - **차원의 저주(Curse of Dimensionality)**는 데이터 차원이 많아질수록 발생하는 문제를 말합니다. SQL에서 MongoDB의 유연성을 따라가려면 **수많은 열을 생성**해야 하고, 이는 관리와 성능 측면에서 어려움을 초래할 수 있습니다.
    - **MongoDB**는 필요에 따라 필드를 추가하고 구조를 동적으로 변경할 수 있기 때문에, **차원의 저주** 문제를 피하고 데이터 구조를 효율적으로 관리할 수 있습니다.
