@@ -19,4 +19,4 @@ import _ from 'lodash'
 ```
 import * as _ from 'lodash'
 ```
-간단하네요.
+번거로운 설정이 없어 간단해서 매력적인 방법입니다.
